@@ -81,7 +81,6 @@ https://templatemo.com/tm-539-simple-house
 
 
                 <?php
-                // tu vykreslujem v cykle jednotlive data zo sablony
                 foreach ($jedla as $item) {
                     ?>
                     <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
