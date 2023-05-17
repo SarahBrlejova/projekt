@@ -1,0 +1,98 @@
+.home a {
+    text-decoration: none;
+    font-size: 20px;
+    margin: 10px;
+    color: #1b6f96;
+
+
+}
+
+.home a:hover{
+    color: red;
+    font-size: 23px;
+}
+
+.home li{
+    margin: 10px;
+}
+
+table{
+    border: 1px solid #DEDEDF;
+    font-size: large;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 1px;
+    text-align: left;
+    text-align: center;
+}
+th {
+    border: 1px solid #DEDEDF;
+    background-color: #ECEFF1;
+    color: #000000;
+    padding: 5px;
+    margin: 10px;
+}
+td {
+    margin: 10px;
+    border: 1px solid #DEDEDF;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 5px;
+
+}
+table a{
+    font-size: large;
+}
+table img{
+    height: 200px;
+}
+a{
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-decoration: none;
+    color: #1b6f96;
+    font-size: large;
+
+}
+a:hover{
+    color: red;
+
+}
+
+form{
+
+    max-width: 450px;
+    background: #FAFAFA;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    border: 6px solid #305A72;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #305A72;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+::placeholder {
+    color:  #305A72;
+
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}

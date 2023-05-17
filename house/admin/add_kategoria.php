@@ -1,77 +1,60 @@
 <?php
+include_once "db.php";
 
-include 'admin/config.php';
-$servername = "localhost";
-
-$username = "root";
-
-$password = "root";
-
-
-$dbname = "simple_house";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-
-    die("Napojenie zlyhalo: " . $conn->connect_error);
-
+if (empty($conn)){
+    $conn=new stdClass();
 }
+session_start();
+if(!isset( $_SESSION['nick'])){
+    header("location: login.php");
+}
+
 if (isset($_POST['add_kategoria'])){
     $kategoria_nazov = $_POST['kategoria_nazov'];
     $kategoria_id = $_POST['id'];
     if(empty($kategoria_nazov) || empty($kategoria_id) ){
-        $message[]='napln pole';
+        echo "naplň polia";
     }else {
         $insert = "INSERT INTO kategoria (id,kategoria_nazov) VALUES ('$kategoria_id','$kategoria_nazov');";
         $upload = mysqli_query($conn,$insert);
         if ($upload){
-            $message[] ='Nová kategória bola vytvorená';
+            echo "Nová kategória bola vytvorená";
         }else{
-            $message[] ='Nepodarilo sa vytvoriť novú kategóriu';
+            echo "Nepodarilo sa vytvoriť novú kategóriu";
         }
     }
 }
 
 if (isset($_GET['delete'])){
     $id = $_GET['delete'];
-    $delete = mysqli_query($conn, "DELETE FROM kategoria WHERE id=$id");
-    if ($delete) {
+    $delete="DELETE FROM kategoria WHERE id=$id";
+    $upload = mysqli_query($conn,$delete);
+    if ($upload) {
         echo "Kategoria s ID $id bola úspešne odstránená.";
     } else {
-        echo "Chyba pri odstraňovaní kategórie: " . mysqli_error($conn);
+        echo "Chyba pri odstraňovaní kategórie: ";
     }
-    header('location:add_kategoria.php');
-    exit;
+
 }
 ?>
 
 
 <!DOCTYPE html>
 <html>
-
-<body>
+<link rel="stylesheet" href="../css/admin.css">
+<body >
 <main>
-
-
-    <?php
-    //echo '<span class="message">'.$message.'</span>';
-    if(isset($message)){
-        foreach ($message as $message){
-            echo '<span class="message">'.$message.'</span>';
-        }
-    }
-    ?>
-
+    <a href="home.php" class="domov" > <- Admin domov</a>
         <div>
-            <form action="<?php $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+            <form method="post" >
                 <h3> Pridaj novu kategoriu</h3>
                 <input type="text" placeholder="zadaj nazov kategorie" name="kategoria_nazov" class="box">
 
                 <h3> zadaj cislo kategorie</h3>
                 <input type="number" placeholder="zadaj cislo kategorie" name="id" class="box">
                 <br><br>
-                <input type="submit" class="btn" name="add_kategoria" value="pridaj">
+                <input type="submit"  name="add_kategoria" value="pridaj">
+
             </form>
         </div>
     <br><br>
@@ -86,12 +69,10 @@ if (isset($_GET['delete'])){
         $select =mysqli_query($conn,"SELECT * FROM kategoria");
         while ($row=mysqli_fetch_assoc($select)){ ?>
             <tr>
-
-
                 <td> <?php echo $row['id']; ?></td>
                 <td> <?php echo $row['kategoria_nazov']; ?></td>
-                <td> <a href="update_kategoria.php?edit=<?php echo $row['id'];?>" > Edit</a>
-                    <a href="add_kategoria.php?delete=<?php echo $row['id'];?>" > Delete</a> <!--toto ?delete si nahravam hore do if  -->
+                <td> <a href="update_kategoria.php?edit=<?php echo $row['id'];?>" > Edit /</a>
+                    <a href="add_kategoria.php?delete=<?php echo $row['id'];?>" > Delete</a>
                 </td>
             </tr>
         <?php }; ?>
